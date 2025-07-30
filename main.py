@@ -109,10 +109,7 @@ def whatsapp_bot():
 
     return str(response)
 
-# Activar ngrok para pruebas locales
+# Corrección para que funcione en Render
 if __name__ == "__main__":
-    port = 5000
-    public_url = ngrok.connect(port).public_url
-    print(f"🚀 Webhook listo en: {public_url}/webhook")
-    print("📲 Usa ese URL en Twilio para configurar los mensajes entrantes.")
-    app.run(port=port)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
